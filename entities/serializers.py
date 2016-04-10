@@ -11,24 +11,14 @@ class OrganizationSerializer(serializers.ModelSerializer):
     model = Organization
     exclude = ()
 
-class ProjectSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Project
-    exclude = ()
-    depth = 2
-
-class CreateProjectSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Project
-    exclude = ('org',)
 
 class CreateCreativeMessageSerializer(serializers.Serializer):
   value = serializers.CharField(max_length=500)
-  creative = serializers.IntegerField()
+  to = serializers.IntegerField()
 
 class CreateOrganizationMessageSerializer(serializers.Serializer):
   value = serializers.CharField(max_length=500)
-  organization = serializers.IntegerField()
+  to = serializers.IntegerField()
 
 class CreativeMessageSerializer(serializers.ModelSerializer):
   class Meta:
@@ -43,7 +33,7 @@ class OrganizationMessageSerializer(serializers.ModelSerializer):
     depth = 2
 
 class SearchSerializer(serializers.Serializer):
-  search = serializers.CharField(max_length=200)
+  search = serializers.CharField(max_length=200, allow_blank=True)
 
 class CreativeSkillSerializer(serializers.ModelSerializer):
   class Meta:
@@ -51,9 +41,9 @@ class CreativeSkillSerializer(serializers.ModelSerializer):
     exclude = ()
     depth = 2
 
-class ProjectSkillSerializer(serializers.ModelSerializer):
+class OrganizationSkillSerializer(serializers.ModelSerializer):
   class Meta:
-    model = ProjectSkill
+    model = OrganizationSkill
     exclude = ()
     depth = 2
 

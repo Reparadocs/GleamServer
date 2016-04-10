@@ -6,25 +6,19 @@ class Creative(models.Model):
   name = models.CharField(max_length=100)
   bio = models.CharField(max_length=500)
   picture = models.URLField()
-  linkedin = models.URLField(null=True)
-  github = models.URLField(null=True)
-  dribbble = models.URLField(null=True)
-  behance = models.URLField(null=True)
+  linkedin = models.CharField(max_length=200, blank=True, null=True)
+  github = models.CharField(max_length=200, blank=True, null=True)
+  dribbble = models.CharField(max_length=200,blank=True, null=True)
+  behance = models.CharField(max_length=200,blank=True, null=True)
   active = models.BooleanField(default=True)
 
 class Organization(models.Model):
   name = models.CharField(max_length=200)
   description = models.CharField(max_length=500)
   picture = models.URLField()
-  address = models.CharField(max_length=200, null=True)
-  website = models.URLField(null=True)
+  address = models.CharField(max_length=200,blank=True,  null=True)
+  website = models.CharField(max_length=200,blank=True,  null=True)
   category = models.CharField(max_length=100)
-
-class Project(models.Model):
-  name = models.CharField(max_length=200)
-  picture = models.URLField()
-  description = models.CharField(max_length=500)
-  org = models.ForeignKey(Organization)
 
 class OrganizationMessage(models.Model):
   value = models.CharField(max_length=500)
@@ -40,9 +34,9 @@ class CreativeSkill(models.Model):
   value = models.CharField(max_length=100)
   creative = models.ForeignKey(Creative)
 
-class ProjectSkill(models.Model):
+class OrganizationSkill(models.Model):
   value = models.CharField(max_length=100)
-  project = models.ForeignKey(Project)
+  organization = models.ForeignKey(Organization)
 
 class CreativeType(models.Model):
   value = models.CharField(max_length=100)
